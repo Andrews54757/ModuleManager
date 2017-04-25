@@ -1,7 +1,7 @@
-var modules = [
+var toCheck = [
     {
         name: "cligui2",
-        version: "latest"
+        version: "1"
     },
     {
         name: "styleme",
@@ -12,14 +12,60 @@ var modules = [
     }, {
         name: "rson",
         version: "latest"
+    },
+    {
+        name: "socket.io",
+        version: "latest"
     }
 
 
 
-
-]
-
+    ]
 var exec = require('child_process').exec;
+var fs = require('fs')
+
+var modules = []
+console.log("Checking Modules")
+
+
+try {
+
+    var f = JSON.parse(fs.readFileSync("modules.json", "utf8"));
+    var u = 0,
+        a = 0
+    for (var i = 0; i < toCheck.length; i++) {
+        var m = toCheck[i],
+            b = f[i];
+
+        if (!b) {;
+            a++;
+            modules.push(b)
+        } else if (m.version != b.version) {;
+            u++;
+            modules.push(b)
+        }
+    }
+    console.log(a + " Modules need to be installed; " + u + " modules need to be updated")
+} catch (e) {
+    modules = toCheck;
+    console.log(toCheck.length + " Modules need to be installed")
+}
+console.log("Installing Module(s)")
+for (var i = 0; i < toCheck.length; i++) {
+    try {
+
+        var a = require(toCheck[i].name)
+
+    } catch (e) {
+        modules.push(toCheck[i])
+
+    }
+
+
+}
+
+if (!modules.length) return callback();
+
 var todo = 1;
 var done = 0;
 
@@ -71,6 +117,16 @@ function install() {
 
 }
 
-function callback() {
 
+
+
+
+
+function callback() {
+    fs.writeFileSync("modules.json", JSON.stringify(toCheck), "utf8")
+
+    var f = require("cligui2")
+        // var c = new f();
+    console.log("Done!")
+        // c.editor("test.js")
 }
