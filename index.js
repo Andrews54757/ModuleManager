@@ -20,7 +20,7 @@ var modules = [
 ]
 
 var exec = require('child_process').exec;
-var todo = 0;
+var todo = 1;
 var done = 0;
 
 function loading(ne) {
@@ -50,6 +50,7 @@ function install() {
     var b = modules[index]
 
     if (!b) {
+        loading("Done!");
         process.stdout.write("\n\u001B[?25h")
         return callback()
     }
@@ -70,14 +71,6 @@ function install() {
 
 }
 
-
-
-
-
-
 function callback() {
-    var f = require("cligui2")
-        // var c = new f();
 
-    // c.editor("test.js")
 }
