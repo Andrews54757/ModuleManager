@@ -50,22 +50,9 @@ try {
     modules = toCheck;
     console.log(toCheck.length + " Modules need to be installed")
 }
-console.log("Installing Module(s)")
-for (var i = 0; i < toCheck.length; i++) {
-    try {
-
-        var a = require(toCheck[i].name)
-
-    } catch (e) {
-        modules.push(toCheck[i])
-
-    }
-
-
-}
 
 if (!modules.length) return callback();
-
+console.log("Installing Module(s)")
 var todo = 1;
 var done = 0;
 
