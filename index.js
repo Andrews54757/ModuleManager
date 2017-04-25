@@ -1,7 +1,7 @@
 var toCheck = [
     {
         name: "cligui2",
-        version: "1"
+        version: "11"
     },
     {
         name: "styleme",
@@ -92,8 +92,9 @@ function install() {
 
     }, 500)
     exec("npm install " + b.name + "@" + b.version, function (error, stdout, stderr) {
+
         if (error) {
-            console.log("Error with installing module: " + n + "/n" + error);
+            console.log("Error with installing module: " + b.name + "\n" + error + "\n");
         }
 
         loading("Installed " + b.name);
